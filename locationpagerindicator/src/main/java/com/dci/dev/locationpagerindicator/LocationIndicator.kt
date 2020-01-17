@@ -152,8 +152,7 @@ class LocationIndicator(
     fun setDotTintRes(@ColorRes tintRes: Int) = setDotTint(getColor(context, tintRes))
 
     fun setup(viewPager: ViewPager?, locationIndex: Int = -1) {
-        if (locationIndex >= 0)
-            this.locationIndex = locationIndex
+        this.locationIndex = locationIndex
         this.viewPager = viewPager
         this.viewPager?.let {
             if (it.adapter != null) {
@@ -167,8 +166,7 @@ class LocationIndicator(
     }
 
     fun setup(viewPager2: ViewPager2?, locationIndex: Int = -1) {
-        if (locationIndex >= 0)
-            this.locationIndex = locationIndex
+        this.locationIndex = locationIndex
         this.viewPager2 = viewPager2
         this.viewPager2?.let {
             if (it.adapter != null) {
