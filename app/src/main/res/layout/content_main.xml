@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="56dp"
+    android:background="@color/blue">
+
+    <com.dci.dev.locationpagerindicator.LocationIndicator
+        android:id="@+id/dots"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="HardcodedText"
+        >
+
+        <TextView
+            android:id="@+id/pageOne"
+            android:text="Page One"
+            style="@style/PageText"
+            />
+
+        <TextView
+            android:id="@+id/pageTwo"
+            android:text="Page Two"
+            style="@style/PageText"
+            />
+
+        <TextView
+            android:id="@+id/pageThree"
+            android:text="Page Three"
+            android:textColor="@color/black"
+            style="@style/PageText"
+            />
+
+        <TextView
+            android:id="@+id/pageFour"
+            android:text="Page Four"
+            style="@style/PageText"
+            />
+
+    </androidx.viewpager.widget.ViewPager>
+
+</FrameLayout>

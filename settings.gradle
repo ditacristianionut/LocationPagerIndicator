@@ -1,0 +1,2 @@
+include ':app', ':locationpagerindicator'
+rootProject.name='LocationIndicator'
