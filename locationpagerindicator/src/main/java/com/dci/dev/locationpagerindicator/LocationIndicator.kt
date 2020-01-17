@@ -353,6 +353,6 @@ class LocationIndicator(
 
     companion object {
 
-        private const val DEFAULT_INDICATOR_WIDTH = 6.5
+        private const val DEFAULT_INDICATOR_WIDTH = 5.5
     }
 }
