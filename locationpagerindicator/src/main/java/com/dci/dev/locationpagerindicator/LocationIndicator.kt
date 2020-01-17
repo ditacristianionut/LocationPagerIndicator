@@ -17,6 +17,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.content.ContextCompat.getDrawable
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import java.lang.Math.abs
 
 class LocationIndicator(
@@ -25,6 +26,7 @@ class LocationIndicator(
 ) : LinearLayout(context, attrs) {
 
     private var viewPager: ViewPager? = null
+    private var viewPager2: ViewPager2? = null
     private var locationIndex: Int = -1
 
     private var indicatorMargin = -1
@@ -164,6 +166,21 @@ class LocationIndicator(
         }
     }
 
+    fun setup(viewPager2: ViewPager2?, locationIndex: Int = -1) {
+        if (locationIndex >= 0)
+            this.locationIndex = locationIndex
+        this.viewPager2 = viewPager2
+        this.viewPager2?.let {
+            if (it.adapter != null) {
+                lastPosition = -1
+                createIndicators()
+                it.unregisterOnPageChangeCallback(internalPageChangeListener2)
+                it.registerOnPageChangeCallback(internalPageChangeListener2)
+                internalPageChangeListener2.onPageSelected(it.currentItem)
+            }
+        }
+    }
+
     private fun invalidateDots() {
         Log.e(this::class.java.simpleName, "invalidate --> ${locationIndex}/${currentItem()}")
         for (i in 0 until childCount) {
@@ -246,8 +263,8 @@ class LocationIndicator(
 
     private fun createIndicators() {
         removeAllViews()
-        val adapter = viewPager?.adapter
-        val count = adapter?.count ?: 0
+//        val adapter = viewPager?.adapter
+        val count = viewPager?.adapter?.count ?: viewPager2?.adapter?.itemCount ?: 0
         if (count <= 0) return
         Log.e(this::class.java.simpleName, "We'll create for index $locationIndex")
         createIndicators(count)
@@ -299,7 +316,7 @@ class LocationIndicator(
         return animatorIn
     }
 
-    private fun currentItem() = viewPager?.currentItem ?: -1
+    private fun currentItem() = viewPager?.currentItem ?: viewPager2?.currentItem ?: -1
 
     private val internalPageChangeListener = object : ViewPager.OnPageChangeListener {
         override fun onPageSelected(position: Int) {
@@ -315,6 +332,21 @@ class LocationIndicator(
         ) = Unit
 
         override fun onPageScrollStateChanged(state: Int) = Unit
+    }
+
+    private val internalPageChangeListener2 = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageScrollStateChanged(state: Int) = Unit
+
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) = Unit
+
+        override fun onPageSelected(position: Int) {
+            if ((viewPager2?.adapter?.itemCount ?: 0) <= 0) return
+            internalPageSelected(position)
+            lastPosition = position        }
     }
 
     private inner class ReverseInterpolator : Interpolator {
