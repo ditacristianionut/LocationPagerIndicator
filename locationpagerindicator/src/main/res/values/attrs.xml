@@ -17,12 +17,12 @@
         <attr format="reference" name="dots_animator"/>
         <attr format="reference" name="dots_animator_reverse"/>
 
-        <attr format="enum" name="dots_orientation">
+        <attr format="enum" name="pager_dots_orientation">
             <enum name="horizontal" value="0"/>
             <enum name="vertical" value="1"/>
         </attr>
 
-        <attr name="dots_gravity">
+        <attr name="pager_dots_gravity">
             <!-- Push object to the top of its container, not changing its size. -->
             <flag name="top" value="0x30"/>
             <!-- Push object to the bottom of its container, not changing its size. -->

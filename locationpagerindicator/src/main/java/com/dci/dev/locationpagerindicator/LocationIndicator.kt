@@ -65,8 +65,8 @@ class LocationIndicator(
             intrinsicWidth = ta.getDimensionPixelSize(R.styleable.LocationIndicator_dot_width, -1)
             intrinsicHeight = ta.getDimensionPixelSize(R.styleable.LocationIndicator_dot_height, -1)
             intrinsicMargin = ta.getDimensionPixelSize(R.styleable.LocationIndicator_dot_margin, -1)
-            intrinsicOrientation = ta.getInt(R.styleable.LocationIndicator_dots_orientation, -1)
-            intrinsicGravity = ta.getInt(R.styleable.LocationIndicator_dots_gravity, -1)
+            intrinsicOrientation = ta.getInt(R.styleable.LocationIndicator_pager_dots_orientation, -1)
+            intrinsicGravity = ta.getInt(R.styleable.LocationIndicator_pager_dots_gravity, -1)
 
             this.animatorResId = ta.getResourceId(
                 R.styleable.LocationIndicator_dots_animator,
