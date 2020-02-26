@@ -2,6 +2,9 @@
 <resources>
 
     <declare-styleable name="LocationIndicator">
+
+        <attr format="dimension" name="dots_background"/>
+
         <attr format="dimension" name="dot_width"/>
         <attr format="dimension" name="dot_height"/>
         <attr format="dimension" name="dot_margin"/>

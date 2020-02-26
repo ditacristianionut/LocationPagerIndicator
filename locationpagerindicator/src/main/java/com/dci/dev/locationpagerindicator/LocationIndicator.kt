@@ -3,6 +3,7 @@ package com.dci.dev.locationpagerindicator
 import android.animation.Animator
 import android.animation.AnimatorInflater.loadAnimator
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
@@ -33,6 +34,7 @@ class LocationIndicator(
     private var indicatorWidth = -1
     private var indicatorHeight = -1
 
+    private var background: Int = 0
     private var indicatorBackgroundResId: Int = 0
     private var indicatorUnselectedBackgroundResId: Int = 0
     private var locationIndicatorBackgroundResId: Int = 0
@@ -68,6 +70,11 @@ class LocationIndicator(
             intrinsicOrientation = ta.getInt(R.styleable.LocationIndicator_pager_dots_orientation, -1)
             intrinsicGravity = ta.getInt(R.styleable.LocationIndicator_pager_dots_gravity, -1)
 
+            this.background = ta.getColor(
+                R.styleable.LocationIndicator_dots_background,
+                Color.TRANSPARENT
+            )
+
             this.animatorResId = ta.getResourceId(
                 R.styleable.LocationIndicator_dots_animator,
                 R.animator.scale_with_alpha
@@ -101,6 +108,8 @@ class LocationIndicator(
         } finally {
             ta.recycle()
         }
+
+        this.setBackgroundColor(background)
 
         val miniSize = (TypedValue.applyDimension(
             COMPLEX_UNIT_DIP,
@@ -180,7 +189,7 @@ class LocationIndicator(
     }
 
     private fun invalidateDots() {
-        Log.e(this::class.java.simpleName, "invalidate --> ${locationIndex}/${currentItem()}")
+        this.setBackgroundColor(background)
         for (i in 0 until childCount) {
             val indicator = getChildAt(i)
             val bgDrawableRes =
@@ -204,7 +213,6 @@ class LocationIndicator(
     }
 
     private fun createIndicators(count: Int) {
-        Log.e(this::class.java.simpleName, "create --> ${locationIndex}/${currentItem()}")
         for (i in 0 until count) {
             val bgDrawable =
                 if (i == locationIndex) {
